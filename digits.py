@@ -9,6 +9,7 @@ from sklearn.datasets import load_digits
 from sklearn.decomposition import PCA
 from sklearn.neighbors import KNeighborsClassifier, NearestCentroid
 
+#Chargement des chiffres
 digits = load_digits()
 n_components = .95
 n_samples = len(digits.images)
