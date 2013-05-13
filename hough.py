@@ -39,12 +39,12 @@ plt.title('Contours')
 #Affichage de la transformée de Hough
 plt.subplot(223)
 plt.imshow(exposure.equalize(h * 1.), extent=[np.rad2deg(theta[-1]), np.rad2deg(theta[0]), d[-1], d[0]], aspect=1. / 3.)
-plt.title(u'Transformée de Hough')
-plt.xlabel(u'Angles (degrés)')
+plt.title('Transformée de Hough')
+plt.xlabel('Angles (degrés)')
 plt.ylabel('Distance (pixels)')
 
 #Détection des maxima locaux de la transformée de Hough
-lm = feature.peak_local_max(h, min_distance=20, threshold=.5)
+lm = feature.peak_local_max(h, min_distance=20, threshold_rel=.5)
 
 #Affichage de l'image puis des droites détectées
 plt.subplot(224)
@@ -57,6 +57,6 @@ for m in lm:
     M2 = [r * np.sin(t) + dist * np.cos(t), r * np.sin(t) - dist * np.cos(t)]
     line = plt.Line2D(M1, M2)
     axes.add_artist(line)
-plt.title(u'Droites détectées')
+plt.title('Droites détectées')
 
 plt.show()

@@ -19,7 +19,7 @@ p = 0.02
 #Transforme une image en une matrice de bits
 def imageToBits(image):
     a = bitarray()
-    a.frombytes("".join(map(chr, image.flatten())))
+    a.frombytes(("".join(map(chr, image.flatten()))).encode())
     m = matrix(a.tolist()) * 1
     m.resize((a.length() / 4, 4))
     return m.transpose()
@@ -27,7 +27,7 @@ def imageToBits(image):
 #Transforme une matrice de bits en image
 def bitsToImage(mat, shape):
     s = bitarray(squeeze(asarray(mat.transpose().flatten())).tolist()).tobytes()
-    return resize(array(map(ord, s)).astype('uint8'), shape)
+    return resize(array(map(ord, s.decode("ascii"))).astype('uint8'), shape)
 
 #Transforme une chaîne de caractères en matrice de bits
 def stringToBits(byteString):
@@ -65,13 +65,13 @@ Application du code de Hamming aux chaînes de caractères
 '''
 
 s = 'Ceci est un code de Hamming'
-print "Chaîne initiale :", s
-C = stringToBits(s) #Conversion chaîne->bits
+print ("Chaîne initiale :", s)
+C = stringToBits(s.encode('latin-1')) #Conversion chaîne->bits
 E = addError(G * C, p) #Codage et ajout d'une erreur
 S = remainder(R * E, 2) #Décodage sans correction
-print "Sans correction :", bitsToString(S)
+print ("Sans correction :", bitsToString(S).decode('latin-1'))
 Z = remainder(R * correct(E), 2) #Décodage avec correction
-print "Avec correction :", bitsToString(Z)
+print ("Avec correction :", bitsToString(Z).decode('latin-1'))
 
 
 '''
