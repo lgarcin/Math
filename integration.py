@@ -22,3 +22,4 @@ print(rectangle1(lambda x:cos(x),0,pi,1000))
 print(rectangle2(lambda x:cos(x),0,pi,1000))
 print(trapeze(lambda x:cos(x),0,pi,1000))
 ##Test
+##Blabla
