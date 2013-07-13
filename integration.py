@@ -4,6 +4,7 @@ Created on 13 juil. 201
 '''
 
 from math import *
+from pylab import *
 
 def rectangle1(f,a,b,n):
     h=(b-a)/n
@@ -15,8 +16,15 @@ def rectangle2(f,a,b,n):
 
 def trapeze(f,a,b,n):
     h=(b-a)/n
-    return sum([(f(a+k*h)+f(a+(k+1)*h))/2 for k in range(0,n)])
+    return sum([(f(a+k*h)+f(a+(k+1)*h))/2 for k in range(0,n)])*h
 
-print(rectangle1(lambda x:cos(x),0,pi,1000))
-print(rectangle2(lambda x:cos(x),0,pi,1000))
-print(trapeze(lambda x:cos(x),0,pi,1000))
+x=[n for n in range(1,100)]
+r1=[abs(rectangle1(cos,0,5*pi/2,n)-1) for n in x]
+r2=[abs(rectangle2(cos,0,5*pi/2,n)-1) for n in x]
+t=[abs(trapeze(cos,0,5*pi/2,n)-1) for n in x]
+
+plot(x,r1,label="rectangle1")
+plot(x,r2,label="rectangle2")
+plot(x,t,label="trapèze")
+legend()
+show()

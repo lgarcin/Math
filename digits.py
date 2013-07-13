@@ -37,7 +37,7 @@ neigh = KNeighborsClassifier(n_neighbors=1, p=2, warn_on_equidistant=False)
 #neigh=NearestCentroid()
 
 neigh.fit(train, train_targets)
-print "Sans ACP :", np.count_nonzero(neigh.predict(test) - test_targets), n_tests
+print("Sans ACP :", np.count_nonzero(neigh.predict(test) - test_targets), n_tests)
 
 neigh.fit(train_pca, train_targets)
-print "Avec ACP :", np.count_nonzero(neigh.predict(test_pca) - test_targets), n_tests
+print("Avec ACP :", np.count_nonzero(neigh.predict(test_pca) - test_targets), n_tests)
