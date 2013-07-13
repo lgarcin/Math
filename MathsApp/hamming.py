@@ -14,7 +14,7 @@ H = matrix([[0, 0, 0, 1, 1, 1, 1], [0, 1, 1, 0, 0, 1, 1], [1, 0, 1, 0, 1, 0, 1]]
 # Matrice de décodage
 R = matrix([[0, 0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 1]])
 # Probabilité d'erreur
-p = 0.02
+p = 0.01
 
 # Transforme une image en une matrice de bits
 def imageToBits(image):
