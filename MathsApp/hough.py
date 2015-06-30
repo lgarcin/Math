@@ -3,8 +3,8 @@
 Transformée de Hough pour la détection de segments de droites
 '''
 
-from skimage.transform import hough
-from skimage.filter import canny
+from skimage.transform import hough_line
+from skimage.filters import canny
 from skimage import data
 from skimage import exposure, feature
 
@@ -21,7 +21,7 @@ image = data.checkerboard()
 edges = canny(image, 2, 1, 25)
 
 #Calcul de la transformée de Hough
-h, theta, d = hough(edges, theta=np.linspace(-np.pi, np.pi, 200))
+h, theta, d = hough_line(edges, theta=np.linspace(-np.pi, np.pi, 200))
 
 plt.figure()
 
