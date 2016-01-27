@@ -44,8 +44,8 @@ def energy(s):
     return sum([s.count(c) * log(frequencies[c]) for c in alphabet if frequencies[c] > 0])
 
 
-message = 'comment allez vous moi je vais bien et vous merci de toute facon je m en vais que me dites vous la mais c est incroyable saperlipopette ca ne marche pas tres bien enfin je vais encore essayer mais bon j ai des doutes'
-#message = 'bizarre comme c est bizarre'
+#message = 'comment allez vous moi je vais bien et vous merci de toute facon je m en vais que me dites vous la mais c est incroyable saperlipopette ca ne marche pas tres bien enfin je vais encore essayer mais bon j ai des doutes'
+message = "ce qui se concoit bien s'enonce clairement et les mots pour le dire arrivent aisement"
 shift = randint(0, 25)
 code = caesar(message, shift)
 print(code)

@@ -1,5 +1,5 @@
 from numpy import linspace, meshgrid, sin, cos, exp
-from matplotlib.pyplot import plot, show, figure
+from matplotlib.pyplot import plot, show, figure, imshow, axis
 from random import gauss, random
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
@@ -18,16 +18,17 @@ def f(x, y):
 # show()
 
 T = .1
-x = 4
-y = 4
+x, y = -4, -4
 e = f(x, y)
 print(e)
 lx = [x]
 ly = [y]
 le = [e]
-while T > .001:
+while T > .0001:
     xx = x + gauss(0, 1)
+    xx = min(max(xx, -10), 10)
     yy = y + gauss(0, 1)
+    yy = min(max(yy, -10), 10)
     ee = f(xx, yy)
     p = exp((ee - e) / T)
     if random() < p:
@@ -39,14 +40,21 @@ while T > .001:
     ly.append(y)
     le.append(e)
 
+X, Y = meshgrid(linspace(-10, 10, 100), linspace(-10, 10, 100))
+Z = f(X, Y)
+
 figure()
-plot(lx, ly)
+imshow(Z, extent=[-10, 10, -10, 10], alpha=.7)
+axis([-10, 10, -10, 10])
+plot(lx, ly, 'k-', alpha=.3)
 figure()
 plot(le)
 
 ax = Axes3D(figure())
-X, Y = meshgrid(linspace(-10, 10, 100), linspace(-10, 10, 100))
-Z = f(X, Y)
 ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0)
 print(x, y, e)
+
+# ax = Axes3D(figure())
+# ax.plot3D(lx, ly, [f(lx[k], ly[k]) for k in range(len(lx))])
+
 show()
