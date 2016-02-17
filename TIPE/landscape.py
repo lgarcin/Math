@@ -85,7 +85,7 @@ while i != -1 and j != -1:
     z.append(a[i, j])
     i, j = p[i, j, 0], p[i, j, 1]
 
-# ax.plot(x, y, z)
+ax.plot(x, y, z)
 
 matshow(a, cmap=get_cmap('terrain'))
 plot(x, y)

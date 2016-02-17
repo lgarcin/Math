@@ -8,10 +8,6 @@ sack = {}
 o = objects.copy()
 s = sack.copy()
 
-# objects = {0: {'value': 50, 'weight': 5}, 1: {'value': 40, 'weight': 4}, 2: {'value': 30, 'weight': 6},
-#            3: {'value': 50, 'weight': 3}, 4: {'value': 30, 'weight': 2}, 5: {'value': 24, 'weight': 6},
-#            6: {'value': 36, 'weight': 7}}
-
 T = 10
 value = 0
 while T > .01:
