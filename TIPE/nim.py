@@ -7,8 +7,10 @@ def nim_sum():
 
 
 tas = randint(1, 20, 5)
-while nim_sum() != 0:
-    tas = randint(1, 20, 5)
+
+
+# while nim_sum() != 0:
+#     tas = randint(1, 20, 5)
 
 
 def random_turn():
@@ -36,3 +38,4 @@ while sum(tas) != 0:
     best_turn()
     print(j, tas)
     j = (j + 1) % 2
+
