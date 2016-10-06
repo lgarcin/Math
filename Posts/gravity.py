@@ -3,22 +3,8 @@ Created on 21 mai 2012
 
 @author: Laurent
 '''
-
 from random import normalvariate, uniform
 from vpython import sphere, vector, rate
-
-
-def distance2(a, b):
-    dx = a.pos.x - b.pos.x
-    dy = a.pos.y - b.pos.y
-    dz = a.pos.z - b.pos.z
-    return dx * dx + dy * dy + dz * dz
-
-
-def getClique(ball, partition):
-    for p in partition:
-        if ball in p:
-            return p
 
 
 def merge(l):
@@ -30,7 +16,8 @@ def merge(l):
         pos += b.mass * b.pos
         vel += b.mass * b.velocity
     rad = s ** (1. / 3)
-    ball = sphere(pos=pos / s, radius=rad)
+    ball = sphere(pos=pos / s, radius=rad, make_trail=True, retain=50)
+    ball.trail_radius = ball.radius / 3
     ball.velocity = vel / s
     ball.mass = s
     ball.radius = rad
@@ -40,7 +27,7 @@ def merge(l):
 ballList = []
 n = 100
 G = 100
-dt = .1
+dt = .01
 
 dpos = 10
 dvel = 5
@@ -53,10 +40,13 @@ for i in range(n):
     vx = uniform(-dvel, dvel)
     vy = uniform(-dvel, dvel)
     vz = uniform(-dvel, dvel)
-    ball = sphere(pos=vector(x, y, z), radius=rad)
+    ball = sphere(pos=vector(x, y, z), radius=rad, make_trail=True, retain=50)
+    ball.trail_radius = ball.radius / 3
     ball.velocity = vector(vx, vy, vz)
     ball.mass = ball.radius ** 3
     ballList.append(ball)
+
+input()
 
 while True:
     rate(100)
@@ -68,13 +58,13 @@ while True:
     for b1 in ballList:
         copyList.remove(b1)
         for b2 in copyList:
-            d = distance2(b1, b2)
+            d = (b1.pos - b2.pos).mag2
             c = G * d ** (-3. / 2) * dt
             b1.velocity += c * b2.mass * (b2.pos - b1.pos)
             b2.velocity += c * b1.mass * (b1.pos - b2.pos)
             if d < (b1.radius + b2.radius) ** 2:
-                p1 = getClique(b1, collisions)
-                p2 = getClique(b2, collisions)
+                p1 = next(p for p in collisions if b1 in p)
+                p2 = next(p for p in collisions if b2 in p)
                 if p1 is not p2:
                     collisions.append(p1.union(p2))
                     collisions.remove(p1)
@@ -85,6 +75,6 @@ while True:
             for b in c:
                 ballList.remove(b)
                 b.visible = False
-                del b
+                b.clear_trail()
     if l != len(ballList):
         print(len(ballList))
