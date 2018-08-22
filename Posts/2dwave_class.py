@@ -12,7 +12,7 @@ class Wave:
         self.ds = ds
         self.dt = dt
         self.c = c
-        self.t = 0
+        self.t = 0.
         self.previous = f(self.X, self.Y)
         self.boundary_conditions(self.previous)
         self.t += self.dt
@@ -21,9 +21,10 @@ class Wave:
 
     def boundary_conditions(self, u):
         u[0, :] = u[-1, :] = u[:, 0] = u[:, -1] = 0
-        # if self.t <= .1:
         w, h = u.shape
-        u[w // 2, h // 2] = 0
+        if self.t <= 1000.:
+            print(self.t)
+            u[w // 2, h // 2] = .1 * sin(2 * pi / 30 * self.t)
 
     def update(self):
         self.t += self.dt
@@ -95,20 +96,17 @@ class Wave3D(Wave):
 
 
 def f(X, Y):
-    u = 0 * X
-    u[1, :] = sin(2 * X[1, :] / 30)
-    return u
-    # return 0 * X
-    # u = 0 * X
-    # w, h = u.shape
-    # u[w // 2, h // 2] = 10
-    # return u
+    return 0 * X
     n, m, a = 7, 11, .3
     Dx, Dy = 30, 30
     return .1 * sin(n * pi * X / Dx) * sin(m * pi * Y / Dy) + a * sin(m * pi * X / Dx) * sin(n * pi * Y / Dy)
 
 
 def g(X, Y):
+    u = 0 * X
+    w, h = u.shape
+    u[w // 2, h // 2] = 1.
+    return u
     return 0 * X
 
 
