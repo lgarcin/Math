@@ -1,9 +1,9 @@
-from numpy import zeros, meshgrid, linspace, sin, cos, exp, sqrt, arange
-from scipy.ndimage.filters import laplace
-from matplotlib.pyplot import imshow, show, figure, axis, draw, contour
-from matplotlib import cm
 from math import pi
+from matplotlib import cm
+from matplotlib.pyplot import imshow, show, figure, draw, contour
 from mpl_toolkits.mplot3d import Axes3D
+from numpy import meshgrid, sin, arange
+from scipy.ndimage.filters import laplace
 
 
 class Wave:
