@@ -167,3 +167,7 @@ pip-log.txt
 .idea/
 *.iml
 *.xml
+
+
+*.wav
+*.mp3
